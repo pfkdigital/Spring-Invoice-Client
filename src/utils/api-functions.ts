@@ -9,3 +9,12 @@ export const getAllInvoices = async (): Promise<Invoice[] | undefined> => {
         console.log(e)
     }
 }
+
+export const getAnInvoiceById = async (id: number): Promise<Invoice | undefined> => {
+    try {
+        const response: AxiosResponse<Invoice> = await axios.get(`http://localhost:8080/api/v1/invoices/${id}`);
+        return response.data
+    } catch (e) {
+        console.log(e)
+    }
+}

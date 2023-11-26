@@ -27,7 +27,7 @@ const NavBar = () => {
 
     return (
         <nav
-            className={"w-screen h-[72px] bg-slate-blue-gray dark:bg-dark-navy xl:absolute xl:w-[103px] xl:h-screen xl:rounded-tr-[20px] xl:rounded-br-[20px]"}>
+            className={"w-screen h-[72px] bg-slate-blue-gray dark:bg-dark-navy xl:fixed xl:w-[103px] xl:h-screen xl:rounded-tr-[20px] xl:rounded-br-[20px]"}>
             <div className={"h-full flex justify-between xl:flex-col xl:items-center xl:justify-between"}>
                 <div
                     className={"relative flex justify-center items-center bg-purple h-[72px] w-[72px] rounded-tr-[20px] rounded-br-[20px] overflow-clip xl:w-full xl:h-[103px]"}>
