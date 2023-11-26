@@ -1,5 +1,7 @@
 import {Invoice} from "@/types";
 import {getAnInvoiceById} from "@/utils/api-functions";
+import GoBack from "@/components/GoBack/GoBack";
+import TopControlBar from "@/components/TopControlBar/TopControlBar";
 
 type InvoicePageProps = {
     params: { id: number }
@@ -7,10 +9,13 @@ type InvoicePageProps = {
 
 export default async function Page({params}: InvoicePageProps) {
     const invoice: Invoice | undefined = await getAnInvoiceById(params.id)
-    console.log(invoice)
+    if(!invoice) {
+        return null
+    }
     return (
-        <div>
-            <p>invoice id: {params.id}</p>
-        </div>
+        <main className={"pt-8 pb-[103px] xl:max-w-[730px] xl:mx-auto xl:pt-[72px]"}>
+            <GoBack />
+            <TopControlBar  invoiceStatus={invoice.invoiceStatus}/>
+        </main>
     );
 };
