@@ -18,6 +18,7 @@ const config: Config = {
             'blue-gray': '#888EB0',
             'pastel-blue': '#7E88C3',
             'blue-black': '#0C0E16',
+            'black-rgba': 'rgba(0, 0, 0, 0.4984)',
             'red': '#EC5757',
             'pale-red': '#FF9797',
             'bg-light': '#F8F8FB',

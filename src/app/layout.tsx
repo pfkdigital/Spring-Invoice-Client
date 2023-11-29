@@ -19,7 +19,7 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
             <Provider>
                 <>
                     <NavBar/>
-                    <main className={"h-full w-screen px-6 md:px-12 xl:px-0 "}>
+                    <main className={"absolute h-full w-screen px-6 md:px-12 xl:px-0 "}>
                         {children}
                     </main>
                 </>
