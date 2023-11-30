@@ -29,6 +29,6 @@ const config: Config = {
             'orange': '#FF8F00'
         }
     },
-    plugins: [],
+    plugins: [require("daisyui")],
 }
 export default config

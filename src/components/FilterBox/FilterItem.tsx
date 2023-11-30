@@ -5,8 +5,8 @@ import {FilterValue} from "@/components/FilterBox/filterData";
 import Checkbox from "@/components/FilterBox/Checkbox";
 
 type FilterItemProps = FilterValue & {
-    currentFilter: 'paid' | 'draft' | 'pending' | "",
-    setCurrentFilter: Dispatch<SetStateAction<"paid" | "draft" | "pending" | "">>
+    currentFilter: "paid" | "draft" | "pending" | "reset" | "",
+    setCurrentFilter: Dispatch<SetStateAction<"paid" | "draft" | "pending" | "reset" | "">>
 }
 
 const FilterItem = ({name,value,currentFilter,setCurrentFilter}:FilterItemProps) => {
@@ -20,6 +20,11 @@ const FilterItem = ({name,value,currentFilter,setCurrentFilter}:FilterItemProps)
     }, [currentFilter, value]);
 
     const handleClick = () => {
+        if(checked){
+            setCurrentFilter("reset")
+            setChecked(false)
+            return
+        }
         setCurrentFilter(value)
     }
 

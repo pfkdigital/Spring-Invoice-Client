@@ -1,11 +1,18 @@
-import React from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import plusIcon from "@/../public/assets/icon-plus.svg";
 import Image from "next/image";
 import FilterBox from "@/components/FilterBox/FilterBox";
 
-const FilterSection = () => {
+type FilterSectionProps = {
+    isActive: boolean;
+    setIsActive: Dispatch<SetStateAction<boolean>>;
+    currentFilter: "paid" | "draft" | "pending" | "reset" | "";
+    setCurrentFilter: Dispatch<SetStateAction<"paid" | "draft" | "pending" | "reset" | "">>
+}
+
+const FilterSection = ({isActive,setIsActive,currentFilter,setCurrentFilter}:FilterSectionProps) => {
   return (
-    <section className={"flex justify-between items-center max-w-[730px]"}>
+    <section className={"flex justify-between items-center max-w-[730px] mb-8"}>
       <div>
         <h2 className={"text-white text-20 font-bold tracking-tight md:text-[32px]"}>
           Invoices
@@ -20,7 +27,7 @@ const FilterSection = () => {
         </p>
       </div>
       <div className={"flex justify-end items-center"}>
-        <FilterBox />
+        <FilterBox currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} isActive={isActive} setIsActive={setIsActive} />
         <div
           className={
             "flex justify-between items-center bg-purple hover:bg-pale-purple rounded-3xl ml-[18px] pl-[6px] pr-[14px] py-2 cursor-pointer"

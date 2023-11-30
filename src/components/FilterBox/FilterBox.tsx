@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import arrowUp from "@/../public/assets/icon-arrow-up.svg";
 import arrowDown from "@/../public/assets/icon-arrow-down.svg";
 import Image from "next/image";
 import { filterData } from "@/components/FilterBox/filterData";
 import FilterItem from "@/components/FilterBox/FilterItem";
 
-const FilterBox = () => {
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const [currentFilter, setCurrentFilter] = useState<
-    "paid" | "draft" | "pending" | ""
-  >("");
+type FilterBoxProps = {
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<boolean>>;
+  currentFilter: "paid" | "draft" | "pending" | "reset" | "";
+  setCurrentFilter: Dispatch<SetStateAction<"paid" | "draft" | "pending" | "reset" | "">>
+}
+
+const FilterBox = ({currentFilter,setCurrentFilter,isActive,setIsActive}:FilterBoxProps) => {
 
   const renderFilterBoxes = () => {
     return filterData.map((filter) => {
@@ -28,8 +31,7 @@ const FilterBox = () => {
   };
 
   return (
-    <div>
-      <div className={"relative"}>
+      <div className={"relative cursor-pointer"}>
         <div
           className={"flex justify-center items-center"}
           onClick={() => setIsActive(!isActive)}
@@ -65,7 +67,6 @@ const FilterBox = () => {
           </div>
         )}
       </div>
-    </div>
   );
 };
 

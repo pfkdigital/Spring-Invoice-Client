@@ -1,16 +1,41 @@
+"use client"
+
 import InvoiceCard from "@/components/InvoiceCard/InvoiceCard";
-import {getAllInvoices} from "@/utils/api-functions";
 import {Invoice} from "@/types";
 import noInvoiceIcon from "@/../public/assets/illustration-empty.svg"
 import Image from "next/image";
 import Link from "next/link";
+import FilterSection from "@/components/FilterSection/FilterSection";
+import {useEffect, useState} from "react";
 
-const InvoiceList = async () => {
-    const invoices: Invoice[] | undefined = await getAllInvoices()
+type InvoiceListProps = {
+    invoices: Invoice[]
+}
+
+const InvoiceList = ({invoices}: InvoiceListProps) => {
+    const [isActive, setIsActive] = useState<boolean>(false);
+    const [filteredList,setFilteredList] = useState<Invoice[]>([])
+    const [currentFilter, setCurrentFilter] = useState<
+        "paid" | "draft" | "pending" | "reset" | ""
+    >("");
+
+    useEffect(() => {
+        setFilteredList(invoices)
+    }, []);
+
+    useEffect(() => {
+        if(currentFilter != ""){
+            const filteredList = invoices.filter(invoice => invoice.invoiceStatus === currentFilter)
+            setFilteredList(filteredList)
+        }
+        if(currentFilter === "reset"){
+            setFilteredList(invoices)
+        }
+    }, [currentFilter, invoices]);
 
     const renderCards = () => {
-        if (invoices) {
-            return invoices.map(invoice => (
+        if (filteredList.length > 0) {
+            return filteredList.map(invoice => (
                 <Link key={invoice.id} href={`/invoice/${invoice.id}`}>
                     <InvoiceCard key={invoice.id} clientName={invoice.clientName}
                                  invoiceReference={invoice.invoiceReference} invoiceStatus={invoice.invoiceStatus}
@@ -27,7 +52,9 @@ const InvoiceList = async () => {
         </div>
     }
     return (
-        <section className={"w-full mt-8"}>
+        <section className={"w-full"}>
+            <FilterSection currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} isActive={isActive}
+                           setIsActive={setIsActive}/>
             {renderCards()}
         </section>
     );
